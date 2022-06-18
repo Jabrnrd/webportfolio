@@ -1,15 +1,20 @@
 
-
 * {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Roboto Slab', serif;
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	color: white;
 }
 
-#landing {
-	background-image: linear-gradient(to top, #9a062f, #9b441a, #906a1c, #808a3f, #71a470, #4fa082, #2f9b93, #1e93a1, #007091, #004d7d, #002b60, #0c053d);
+#landing p{
+	font-size: 20px;
 }
+
+body {
+	background-image: linear-gradient(to right bottom, #000001, #02021A, #03122D, #09265A, #034160, #139384, #39D2C0, #6BFCC7);
+}
+
 
 html {
 	scroll-behavior: smooth;
@@ -33,6 +38,22 @@ footer span {
 	margin-left: 0px;
 }
 
-h1 {
-	font-family: 'Montserrat', sans-serif;
+.card {
+	max-height: 100;
+}
+
+h5 {
+	color: black;
+}
+
+p[class="card-text"]{
+	color: black;
+}
+
+div [class="modal-body"] {
+	color: black;
+}
+
+h2 {
+	font-size: 55px;
 }
