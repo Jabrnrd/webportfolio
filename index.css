@@ -38,17 +38,6 @@ footer span {
 	margin-left: 0px;
 }
 
-#project {
-	max-height: 50px;
-}
-
-h5 {
-	color: black;
-}
-
-p[class="card-text"]{
-	color: black;
-}
 
 div [class="modal-body"] {
 	color: black;
