@@ -10,13 +10,26 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,600&family=Roboto+Slab&display=swap" rel="stylesheet">
 
+	<!-- Sweet Alert -->
+	<script src="sweetalert2.all.min.js"></script>
+	<script src="sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="sweetalert2.min.css">
+
 	<!-- Bootstrap Link -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 	<!-- CSS Link -->
 	<link rel="stylesheet" type="text/css" href="index.css">
-	<title> John Carlo Bernardo || Web Development Portfolio
-	</title>
+
+	<!-- Send Email Javascript -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("6KzmoJX2rhI3aydAu");
+        })();
+    </script>
+
+	<title> John Carlo Bernardo || Web Development Portfolio </title>
 </head>
 <body>
 	<!-- Nav Bar -->
@@ -189,23 +202,24 @@
 	    </div>
 	    <div class="row">
 	        <div class="col-md-6 my-4">
-	           <h3 class="text-center my-4 map-wrapper">Visit Us</h3>
+	           <h3 class="text-center my-4 map-wrapper">My Location</h3>
 	           <iframe class="col-sm-12" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d240.9163107879757!2d120.95025298800569!3d14.95596995660958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33970085a08ab391%3A0xc8448a180ef22057!2sGeneral%20Alejo%20G.%20Santos%20Hwy%2C%20Bustos%2C%20Bulacan!5e0!3m2!1sen!2sph!4v1660473957461!5m2!1sen!2sph" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 	        </div>
 	        <div class="col-md-6 my-4">
-	        <h3 class="text-center my-4">Message Us</h3>
-	        <form class="col-sm-12" onsubmit="sendEmail(); reset(); return false;">
+	        <h3 class="text-center my-4">Leave a Message</h3>
+	        <form class="col-sm-12" id="contact-form">
+	        	<input type="hidden" name="contact_number">
 	            <div class="form-group">
 	                <label>Full Name</label>
-	                <input type="text" id="name" class="form-control" required>
+	                <input type="text" id="fullName" class="form-control">
 	            </div>
 	            <div class="form-group">
 	                <label>Email Address</label>
-	                <input type="email" id="email" class="form-control" required>
+	                <input type="email" id="email" class="form-control">
 	            </div>
 	     		<div class="form-group">
 	     			<label for="message">Message</label>
-	     			<textarea id="message" class="form-control" rows="5" required></textarea>
+	     			<textarea id="message" class="form-control" rows="5"></textarea>
 	     			<button class="mt-2" type="sumbit" id="sendMessage">
 	     			  <div class="svg-wrapper-1">
 	     			    <div class="svg-wrapper">
@@ -234,25 +248,45 @@
 	</footer>
 	<!-- footer end -->
 
+	<!-- Send Email JS -->
 
+	<script type="text/javascript">
+		function validate(){
+			let name = document.querySelector("#fullName")
+			let email = document.querySelector("#email")
+			let msg = document.querySelector("#message")
+			let submit = document.querySelector("#sendMessage")
 
-	<!-- Send Email Javascript -->
+			submit.addEventListener("click", (e)=>{
+				e.preventDefault()
 
-	<script src="https://smtpjs.com/v3/smtp.js"></script>
-	<script>
-		function sendEmail(){
-			Email.send({
-				SecureToken: "0048d634-ff94-4eb0-9dcd-c4d01cda1926",
-			    To : 'jvbernardo1996@gmail.com',
-			    From : document.getElementById("email").value,
-			    Subject : "New Contract From Inquiry",
-			    Body : "Full Name: " + document.getElementById("name").value + "<br> Email: " + document.getElementById("email").value + "<br> Message: " + document.getElementById("message").value
-			}).then(
-			  message => alert("Message Sent Succesfully")
-			);
+				if(name.value == "" || email.value == "" || msg.value == ""){
+					return failed();
+				}
+				else{
+					sendMail(name.value, email.value, msg.value);
+					nice();
+				}
+			})
+
+		}
+		validate()
+
+		function sendMail(name, email, msg){
+			emailjs.send("service_3f9cw5o","template_oax86m8",{
+			Name: name,
+			Email: email,
+			Message: msg,
+			});
 		}
 
+
+
+
 	</script>
+
+	<!-- JS file -->
+	<script type="text/javascript" src="./index.js"></script>
 
 	<!-- JS Bundle Link -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
